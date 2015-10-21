@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">   
+<head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>图片放大js效果</title>
+    <link rel="stylesheet" href="zoom.css">
+</head>
+<body>
+	<div id="gallery" class="img-list">
+		<a data="cp/20150105569415.1685/YX22882-l2_C_-家电扒光价.jpg" href="javascript:void(0);" onclick="return showImg(this)">
+			<img src="cp/20150105569415.1685/YX22882-l2_C_-家电扒光价.thumb.jpg" />
+		</a>
+		<a data="cp/20150104093948.1356/SQ22854周四会员福利定稿.jpg" href="javascript:void(0);" onclick="return showImg(this)">
+			<img src="cp/20150104093948.1356/SQ22854周四会员福利定稿.thumb.jpg">
+		</a>
+	</div>	
+	<div id="zoomLayer" class="zoom100" style="display:none;"><img id="zoomImg" class="loading" src="img/loading100.gif" /></div>
+    <!-- S 点击图片预览框 -->
+    <div id="popPreview" style="display:none;">
+        <div class="alpha_bg"></div>
+        <div id="preview"></div>
+        <div class="popFooter">
+            <div class="nav">
+                <ul>
+                    <li><a class="left" href="javascript:void(0)">上一个</a></li>
+                    <li><a class="right" href="javascript:void(0)">下一个</a></li>
+                    <li><a class="enlarge" href="javascript:void(0)"></a></li>
+                    <li><a class="narrow" href="javascript:void(0)"></a></li>
+                    <li><a class="close" href="javascript:void(0)">X</a></li>
+                </ul>
+            </div>
+        </div>
+        <a href="javascript:void(0);" id="popPreviewTools" class="pop_close">关闭</a>
+    </div>
+</body>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="zoom-img.js" ></script>
+</html>
