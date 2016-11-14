@@ -131,7 +131,8 @@ var showImg = function(_this){
         w = this.width;
         h = this.height;
         var _w= Math.round(w/2),
-            _h= Math.round(h/2);
+            _h= Math.round(h/2),
+            wh= $(window).height();   
 
         if(w<$(window).width() && _h<$(window).height()){
             scale = 1;
@@ -144,6 +145,9 @@ var showImg = function(_this){
         else if(w>h && w>=1000){
             scale = 0.5;
             top = Math.round(h/5)+'px';
+            if(wh>_h){
+                top = "50%";
+            }
         }
         else{
             scale = 0.5;
@@ -204,8 +208,10 @@ var loading = function(src){
         var img, top = 0;
         w = this.width;
         h = this.height;
+
         var _w= Math.round(w/2),
-            _h= Math.round(h/2);
+            _h= Math.round(h/2),
+            wh= $(window).height();
         if(w<$(window).width() && _h<$(window).height()){
             scale = 1;
             top = _h+'px';
@@ -213,7 +219,14 @@ var loading = function(src){
         else if (w < 1000 && 2 * w < h) {
             scale = 1;
             top = _h + 'px';
-        } else {
+        }else if(w>h && w>=1000){
+            scale = 0.5;
+            top = Math.round(h/5)+'px';
+            if(wh>_h){
+                top = "50%";
+            }
+        }
+        else {
             scale = 0.5;
             top = Math.round(h / 4) + 'px';
         }
