@@ -10,5 +10,11 @@
 
 ### 缺点
 
-兼容性较差
+兼容性较差，目前在chrome ,qq浏览器支持很好；ie上不支持滚轮缩放。
+
+### DEMO
+
+http://www.loadphp.cn/lab/zoomImg/index.html
+
+
 
