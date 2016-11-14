@@ -132,26 +132,35 @@ var showImg = function(_this){
         h = this.height;
         var _w= Math.round(w/2),
             _h= Math.round(h/2),
+            ww= $(window).width(),
             wh= $(window).height();   
 
-        if(w<$(window).width() && _h<$(window).height()){
-            scale = 1;
-            top = _h+'px';
+        console.log(Math.round(w/ww));    
+        if(ww <= 640){
+            //手机端
+            scale = 1/(Math.round(w/ww));
+            top = "50%";
         }
-        else if(w<1000 && 2*w<h){
-            scale = 1;
-            top = _h+'px';
-        }
-        else if(w>h && w>=1000){
-            scale = 0.5;
-            top = Math.round(h/5)+'px';
-            if(wh>_h){
-                top = "50%";
+        else{    
+            if(w< ww&& _h<wh ){
+                scale = 1;
+                top = _h+'px';
             }
-        }
-        else{
-            scale = 0.5;
-            top = Math.round(h/4)+'px';
+            else if(w<1000 && 2*w<h){
+                scale = 1;
+                top = _h+'px';
+            }
+            else if(w>h && w>=1000){
+                scale = 0.5;
+                top = Math.round(h/5)+'px';
+                if(wh>_h){
+                    top = "50%";
+                }
+            }
+            else{
+                scale = 0.5;
+                top = Math.round(h/4)+'px';
+            }
         }
 
         var html = '<img class="reviewphoto" style="-webkit-transform:scale('+scale+');top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
@@ -204,36 +213,44 @@ var loading = function(src){
     $('#zoomLayer').show();
     //加载图片资源
     preLoadImage(src,function() {
-        $('#zoomLayer').hide();
         var img, top = 0;
         w = this.width;
         h = this.height;
 
         var _w= Math.round(w/2),
             _h= Math.round(h/2),
+            ww= $(window).width(),
             wh= $(window).height();
-        if(w<$(window).width() && _h<$(window).height()){
-            scale = 1;
-            top = _h+'px';
+        if(ww <= 640){
+            //手机端
+            scale = 1/(Math.round(w/ww));
+            top = "50%";
         }
-        else if (w < 1000 && 2 * w < h) {
-            scale = 1;
-            top = _h + 'px';
-        }else if(w>h && w>=1000){
-            scale = 0.5;
-            top = Math.round(h/5)+'px';
-            if(wh>_h){
-                top = "50%";
+        else{        
+            if(w< ww&& _h<wh ){
+                scale = 1;
+                top = _h+'px';
             }
-        }
-        else {
-            scale = 0.5;
-            top = Math.round(h / 4) + 'px';
-        }
+            else if (w < 1000 && 2 * w < h) {
+                scale = 1;
+                top = _h + 'px';
+            }else if(w>h && w>=1000){
+                scale = 0.5;
+                top = Math.round(h/5)+'px';
+                if(wh>_h){
+                    top = "50%";
+                }
+            }
+            else {
+                scale = 0.5;
+                top = Math.round(h / 4) + 'px';
+            }
+        }    
 
         var html = '<img class="reviewphoto" style="-webkit-transform:scale(' + scale + ');top:' + top + ';margin-top:-' + _h + 'px;margin-left:-' + _w + 'px;" src="' + src + '">';
         $preview.html(html);
         $('#preview .reviewphoto').dragmove();
+        $('#zoomLayer').hide();
     });
 };
 //获取当前点击对象的索引
