@@ -140,7 +140,12 @@ var showImg = function(_this){
         else if(w<1000 && 2*w<h){
             scale = 1;
             top = _h+'px';
-        }else{
+        }
+        else if(w>h && w>=1000){
+            scale = 0.5;
+            top = Math.round(h/5)+'px';
+        }
+        else{
             scale = 0.5;
             top = Math.round(h/4)+'px';
         }
