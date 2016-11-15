@@ -162,8 +162,10 @@ var showImg = function(_this){
                 top = Math.round(h/4)+'px';
             }
         }
-
-        var html = '<img class="reviewphoto" style="-webkit-transform:scale('+scale+');top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
+		var style = document.getElementById("dynamic");
+	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
+		
+        var html = '<img class="reviewphoto" style="-webkit-animation: zoomMove 1s 0s both;;top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
         $preview.html(html);
         $('#popPreview').show();
 
@@ -246,8 +248,10 @@ var loading = function(src){
                 top = Math.round(h / 4) + 'px';
             }
         }    
-
-        var html = '<img class="reviewphoto" style="-webkit-transform:scale(' + scale + ');top:' + top + ';margin-top:-' + _h + 'px;margin-left:-' + _w + 'px;" src="' + src + '">';
+		var style = document.getElementById("dynamic");
+	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
+		
+        var html = '<img class="reviewphoto" style="-webkit-animation: zoomMove 1s 0s both;;top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
         $preview.html(html);
         $('#preview .reviewphoto').dragmove();
         $('#zoomLayer').hide();
