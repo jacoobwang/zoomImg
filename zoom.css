@@ -164,3 +164,6 @@ a{
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+.move{
+    -webkit-animation: mymove 1s 0s both;
+}

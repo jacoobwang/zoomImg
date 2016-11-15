@@ -93,6 +93,7 @@ var scrollFunc = function (e) {
                 scale = (scale <= 0)? 0: scale -= 0.1;
             }
         }
+		$('#preview .reviewphoto').removeClass('move');
         _scale = 'scale('+scale+')';
         imgO.css('-webkit-transform',_scale);
     }
@@ -165,7 +166,7 @@ var showImg = function(_this){
 		var style = document.getElementById("dynamic");
 	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
 		
-        var html = '<img class="reviewphoto" style="-webkit-animation: zoomMove 1s 0s both;;top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
+        var html = '<img class="reviewphoto move" style="top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
         $preview.html(html);
         $('#popPreview').show();
 
@@ -174,6 +175,7 @@ var showImg = function(_this){
             $('#popPreview').hide();
         });
         $('#popPreview .enlarge').click(function(){
+			$('#preview .reviewphoto').removeClass('move');	
             scale = parseFloat(scale+0.1);
             var _scale = 'scale('+scale+')';
             $('#preview .reviewphoto').css('-webkit-transform',_scale);
@@ -186,6 +188,7 @@ var showImg = function(_this){
                     $('#preview .reviewphoto').css('top','50%');
                 }
             }
+			$('#preview .reviewphoto').removeClass('move');
             scale = parseFloat((scale-0.1).toFixed(1));
             scale = scale<0?0:scale;
             var _scale = 'scale('+scale+')';
@@ -251,7 +254,7 @@ var loading = function(src){
 		var style = document.getElementById("dynamic");
 	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
 		
-        var html = '<img class="reviewphoto" style="-webkit-animation: zoomMove 1s 0s both;;top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
+        var html = '<img class="reviewphoto move" style="top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
         $preview.html(html);
         $('#preview .reviewphoto').dragmove();
         $('#zoomLayer').hide();
