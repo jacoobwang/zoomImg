@@ -165,5 +165,5 @@ a{
     transform: rotate(45deg);
 }
 .move{
-    -webkit-animation: mymove 1s 0s both;
+    -webkit-animation: zoomMove 1s 0s both;
 }
