@@ -140,7 +140,7 @@ var showImg = function(_this){
         $('#popPreview .left').click(function(){
             if(index ==0){
                 alert('前面没有拉~');
-                return;
+                return false;
             }
             index -= 1;
             loading(srcArr[index]);
@@ -148,7 +148,7 @@ var showImg = function(_this){
         $('#popPreview .right').click(function(){
             if((index+1) == srcArr.length){
                 alert('后面没有拉~');
-                return;
+                return false;
             }
             index += 1;
             loading(srcArr[index]);
