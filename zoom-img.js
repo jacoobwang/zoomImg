@@ -75,13 +75,6 @@ var scrollFunc = function (e) {
                 scale = parseFloat(scale+0.1);
             }
             if (e.wheelDelta < 0) { //向下
-                if(w<1000 && scale == 1){
-                    imgO.css('top','50%');
-                }else{
-                    if(scale == 0.5){
-                        imgO.css('top','50%');
-                    }
-                }
                 scale = parseFloat((scale-0.1).toFixed(1));
                 scale = scale<0?0:scale;
             }
@@ -93,7 +86,7 @@ var scrollFunc = function (e) {
                 scale = (scale <= 0)? 0: scale -= 0.1;
             }
         }
-		$('#preview .reviewphoto').removeClass('move');
+        $('#preview .reviewphoto').removeClass('move');
         _scale = 'scale('+scale+')';
         imgO.css('-webkit-transform',_scale);
     }
@@ -127,71 +120,21 @@ var showImg = function(_this){
     $('#zoomLayer').show();
     //加载图片资源
     preLoadImage(src,function(){
-        $('#zoomLayer').hide();
-        var img,top=0;
-        w = this.width;
-        h = this.height;
-        var _w= Math.round(w/2),
-            _h= Math.round(h/2),
-            ww= $(window).width(),
-            wh= $(window).height();   
-
-        console.log(Math.round(w/ww));    
-        if(ww <= 640){
-            //手机端
-            scale = 1/(Math.round(w/ww));
-            top = "50%";
-        }
-        else{    
-            if(w< ww&& _h<wh ){
-                scale = 1;
-                top = _h+'px';
-            }
-            else if(w<1000 && 2*w<h){
-                scale = 1;
-                top = _h+'px';
-            }
-            else if(w>h && w>=1000){
-                scale = 0.5;
-                top = Math.round(h/5)+'px';
-                if(wh>_h){
-                    top = "50%";
-                }
-            }
-            else{
-                scale = 0.5;
-                top = Math.round(h/4)+'px';
-            }
-        }
-		var style = document.getElementById("dynamic");
-	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
-		
-        var html = '<img class="reviewphoto move" style="top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
-        $preview.html(html);
-        $('#popPreview').show();
-
-        $('#preview .reviewphoto').dragmove();
+        createHtml(src,this.width,this.height);
         $('#popPreview .close,#popPreviewTools').click(function(){
             $('#popPreview').hide();
         });
         $('#popPreview .enlarge').click(function(){
-			$('#preview .reviewphoto').removeClass('move');	
             scale = parseFloat(scale+0.1);
             var _scale = 'scale('+scale+')';
+            $('#preview .reviewphoto').removeClass('move');
             $('#preview .reviewphoto').css('-webkit-transform',_scale);
         });
         $('#popPreview .narrow').click(function(){
-            if(w<1000 && scale == 1){
-                $('#preview .reviewphoto').css('top','50%');
-            }else{
-                if(scale == 0.5){
-                    $('#preview .reviewphoto').css('top','50%');
-                }
-            }
-			$('#preview .reviewphoto').removeClass('move');
             scale = parseFloat((scale-0.1).toFixed(1));
             scale = scale<0?0:scale;
             var _scale = 'scale('+scale+')';
+            $('#preview .reviewphoto').removeClass('move');
             $('#preview .reviewphoto').css('-webkit-transform',_scale);
         });
         $('#popPreview .left').click(function(){
@@ -203,62 +146,67 @@ var showImg = function(_this){
             loading(srcArr[index]);
         });
         $('#popPreview .right').click(function(){
-            index += 1;
-            if(index == srcArr.length){
+            if((index+1) == srcArr.length){
                 alert('后面没有拉~');
                 return;
             }
+            index += 1;
             loading(srcArr[index]);
         });
     });
     return ;
 };
+//生成缩略图DOM
+var createHtml = function(src,w,h){
+    var top = 0,
+        _w= Math.round(w/2),
+        _h= Math.round(h/2),
+        ww= $(window).width(),
+        wh= $(window).height();
+    if(ww <= 640){
+        //手机端
+        scale = 1/(Math.round(w/ww));
+        top = "50%";
+    }
+    else{        
+        if(w>=ww){
+            //宽图
+            if(h>=wh){ //长度>=屏幕
+                scale = Math.ceil((ww*wh)/(w*h)*100)/100;
+                top = "-" + (h-wh)/2 + "px";
+                left= (ww-w)/2 + "px";
+            }else{ //长度<屏幕
+                scale = Math.ceil((ww/w)*100)/100;
+                top = (wh-h)/2+"px";
+                left= "-" + (w-ww)/2 + "px";
+            }
+        }else{
+            if(h>w){//长图
+                scale = Math.ceil((wh/h)*100)/100;
+                top = "-" + (h-wh)/2 + "px";
+                left= (ww-w)/2 + "px";
+            }else{
+                //小图
+                scale = 1;
+                top = (wh-h)/2 + "px";
+                left= (ww-w)/2 + "px";
+            }   
+        }
+    } 
+    var style = document.getElementById("dynamic");
+    style.innerHTML = '@-webkit-keyframes mymove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';
+
+    var html = '<img class="reviewphoto move" style="top:'+top+';left:'+left+';" src="'+src+'">';
+    $preview.html(html);
+    $('#popPreview').show();
+    $('#preview .reviewphoto').dragmove();
+    $('#zoomLayer').hide();
+}
 //加载新图片
 var loading = function(src){
     $('#zoomLayer').show();
     //加载图片资源
-    preLoadImage(src,function() {
-        var img, top = 0;
-        w = this.width;
-        h = this.height;
-
-        var _w= Math.round(w/2),
-            _h= Math.round(h/2),
-            ww= $(window).width(),
-            wh= $(window).height();
-        if(ww <= 640){
-            //手机端
-            scale = 1/(Math.round(w/ww));
-            top = "50%";
-        }
-        else{        
-            if(w< ww&& _h<wh ){
-                scale = 1;
-                top = _h+'px';
-            }
-            else if (w < 1000 && 2 * w < h) {
-                scale = 1;
-                top = _h + 'px';
-            }else if(w>h && w>=1000){
-                scale = 0.5;
-                top = Math.round(h/5)+'px';
-                if(wh>_h){
-                    top = "50%";
-                }
-            }
-            else {
-                scale = 0.5;
-                top = Math.round(h / 4) + 'px';
-            }
-        }    
-		var style = document.getElementById("dynamic");
-	        style.innerHTML = '@-webkit-keyframes zoomMove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';	
-		
-        var html = '<img class="reviewphoto move" style="top:'+top+';margin-top:-'+_h+'px;margin-left:-'+_w+'px;" src="'+src+'">';
-        $preview.html(html);
-        $('#preview .reviewphoto').dragmove();
-        $('#zoomLayer').hide();
-    });
+    preLoadImage(src,function(){createHtml(src,this.width,this.height)});
 };
 //获取当前点击对象的索引
 var getCurrentIndex = function(list,o){
