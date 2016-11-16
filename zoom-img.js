@@ -181,7 +181,7 @@ var createHtml = function(src,w,h){
                 left= "-" + (w-ww)/2 + "px";
             }
         }else{
-            if(h>w){//长图
+            if(h>w && h>=wh){//长图
                 scale = Math.ceil((wh/h)*100)/100;
                 top = "-" + (h-wh)/2 + "px";
                 left= (ww-w)/2 + "px";
