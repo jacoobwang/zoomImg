@@ -5,7 +5,7 @@ a{
     position: absolute;
     left: 50%;
     top: 50%;
-    z-index: 100;
+    z-index:100;
 }
 #popPreview{
     position: fixed;
@@ -14,7 +14,6 @@ a{
     left: 0;
     top: 0;
     z-index: 99;
-    background-color: rgba(0,0,0,0.6);
 }
 #preview{
     position: relative;
@@ -115,7 +114,6 @@ a{
     height: 100%;
     left: 0;
     top: 0;
-    background-color: rgba(0,0,0,.5);
     z-index: 1;
 }
 .pop_close{
@@ -167,3 +165,8 @@ a{
 .move{
     -webkit-animation: mymove 1s 0s both;
 }
+/*Safari and Chrome  animation ------------------------------*/
+/**@-webkit-keyframes mymove {
+    0%{-webkit-transform:scale(0);}
+    100%{-webkit-transform:scale(0.5);}
+}**/
