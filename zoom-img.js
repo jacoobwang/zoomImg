@@ -49,7 +49,6 @@
         var _defaults = {
             "color"  : '#000',
             "opacity": 0.5, 
-            "imageAction": "fadeIn",
             "loading": "img/loading100.gif"
         };
         //合并属性
@@ -76,11 +75,10 @@
             html += '<li><a class="right" href="javascript:void(0)">下一个</a></li><li><a class="enlarge" href="javascript:void(0)"></a></li>';
             html += '<li><a class="narrow" href="javascript:void(0)"></a></li><li><a class="close" href="javascript:void(0)">X</a></li></ul>';
             html += '</div></div><a href="javascript:void(0);" id="popPreviewTools" class="pop_close">关闭</a></div>';
-            html += '<div id="zoomLayer" class="zoom100" style="display:none;"><img id="zoomImg" class="loading" src="img/loading100.gif" /></div>';
             $(document.body).append(html);
             var style = '<style id=dynamic></style>';
             $(document.head).append(style);
-            $("<link>").attr({ rel: "stylesheet",type: "text/css",href: "zoom.css"}).appendTo("head");
+            $("<link>").attr({ rel: "stylesheet",type: "text/css",href: "zoom.min.css"}).appendTo("head");
         })();
         
         // 图片的预下载
@@ -137,7 +135,7 @@
                 }
             } 
             var style = document.getElementById("dynamic");
-            style.innerHTML = '@-webkit-keyframes mymove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}';
+            style.innerHTML = '@-webkit-keyframes mymove {0%{-webkit-transform:scale(0);}100%{-webkit-transform:scale('+scale+');}}@keyframes mymove {0%{transform:scale(0);}100%{transform:scale('+scale+');}}';
 
             var html = '<img class="reviewphoto move" style="top:'+top+';left:'+left+';" src="'+src+'">';
             return html;

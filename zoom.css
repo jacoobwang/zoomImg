@@ -166,7 +166,5 @@ a{
     -webkit-animation: mymove 1s 0s both;
 }
 /*Safari and Chrome  animation ------------------------------*/
-/**@-webkit-keyframes mymove {
-    0%{-webkit-transform:scale(0);}
-    100%{-webkit-transform:scale(0.5);}
-}**/
+
+
