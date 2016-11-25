@@ -6,6 +6,8 @@ a{
     left: 50%;
     top: 50%;
     z-index:100;
+	margin-left:-50px;
+	margin-top:-50px;
 }
 #popPreview{
     position: fixed;
